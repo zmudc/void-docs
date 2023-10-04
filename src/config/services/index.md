@@ -26,7 +26,12 @@ daemon](../cron.md).
 Each service managed by runit has an associated *service directory*.
 
 A service directory requires only one file: an executable named `run`, which is
-expected to exec a process in the foreground.
+required to exec a process in the foreground. Services that run in the
+background or otherwise become orphaned from their parent process or controlling
+terminal cannot be used in a runit service. Although there are tools available
+to work around this limitation of runit such as fghack provided by the daemontools
+package, the only recommended solution is to modify the service so it runs in the
+foreground.
 
 Optionally, a service directory may contain:
 
